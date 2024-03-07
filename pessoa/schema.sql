@@ -1,0 +1,27 @@
+
+    create table pessoa (
+        cpf varchar(255) not null,
+        altura varchar(255),
+        bairro varchar(255),
+        celular varchar(255),
+        cep varchar(255),
+        cidade varchar(255),
+        cor varchar(255),
+        data_nasc varchar(255),
+        email varchar(255),
+        endereco varchar(255),
+        estado varchar(255),
+        idade varchar(255),
+        mae varchar(255),
+        nome varchar(255),
+        numero varchar(255),
+        pai varchar(255),
+        peso varchar(255),
+        rg varchar(255),
+        senha varchar(255),
+        sexo varchar(255),
+        signo varchar(255),
+        telefone_fixo varchar(255),
+        tipo_sanguineo varchar(255),
+        primary key (cpf)
+    );

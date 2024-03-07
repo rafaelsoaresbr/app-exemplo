@@ -1,0 +1,47 @@
+version: "3.8"
+
+logging:
+  options:
+    max-size: '12m'
+    max-file: '5'
+  driver: json-file
+
+services:
+  db:
+    image: postgres
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 30s
+        max_attempts: 3
+        window: 120s
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    networks:
+       - private1
+    env_file:
+      - postgres.env
+    ports:
+      - 30001:5432
+
+  pgadmin:
+    image: dpage/pgadmin4
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 30s
+        max_attempts: 3
+        window: 120s
+    networks:
+       - private1
+    env_file:
+      - pgadmin.env
+    ports:
+      - 30002:80
+      - 30003:443
+
+volumes:
+  db-data:
+
+networks:
+  overlay:
