@@ -6,6 +6,8 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +19,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.example.pessoa.model.Pessoa;
 import com.example.pessoa.service.PessoaService;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api/v1")
 public class PessoaController {
@@ -24,9 +27,20 @@ public class PessoaController {
 	@Autowired
 	PessoaService service;
 
+	@GetMapping("/pessoa")
+	public ResponseEntity<List<Pessoa>> getPessoas() {
+		return ResponseEntity.ok(service.getAll());
+	}
+
 	@GetMapping("/pessoa/{cpf}")
 	public ResponseEntity<Optional<Pessoa>> getPessoa(@PathVariable String cpf) {
 		return ResponseEntity.ok(service.getByCpf(cpf));
+	}
+
+	@DeleteMapping("/pessoa/{cpf}")
+	public ResponseEntity<Optional<Pessoa>> deletePessoa(@PathVariable String cpf) {
+		service.deleteByCpf(cpf);
+		return ResponseEntity.noContent().build();
 	}
 
 	@PostMapping("/pessoa")

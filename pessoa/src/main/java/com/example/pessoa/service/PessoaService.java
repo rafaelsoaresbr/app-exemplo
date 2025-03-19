@@ -27,4 +27,12 @@ public class PessoaService {
 		return repository.saveAll(pessoa);
 	}
 
+	public List<Pessoa> getAll() {
+		return repository.findAll();
+	}
+
+	public void deleteByCpf(String cpf) {
+		repository.deleteById(cpf);
+	}
+
 }
